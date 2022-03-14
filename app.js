@@ -1,15 +1,22 @@
-var async = function(){
-    setTimeout(function(){log("I am coming out later although I have been called before the next time")},2000)
-}
+const express = require("express")
+const config = require('./config')
 
-var adder = function (first, second){
-    var sum=first+second
-}
 
-var log = function (msg){
-    console.log("[Log] : ", msg)
-}
+const port = 8080
+const serverLog = config.log.serverLog
 
-log ("The sum is "+adder(5,6))
-async();
-log("This is going to come out before the previous one")
+const app = express()
+
+// middleware
+app.use(express.json())
+
+// request path
+app.get('/', (req, res) => {
+    serverLog('\'/\' requested')
+    res.send(`<h>Hello from Kathy's Server</h>`)
+})
+
+
+app.listen(port, () => {
+    serverLog(`server started and listening on port: ${port}`)
+})
