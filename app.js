@@ -7,10 +7,10 @@ const serverLog = config.log.serverLog
 
 const app = express()
 
-// middleware
+
 app.use(express.json())
 
-// request path
+
 app.get('/', (req, res) => {
     serverLog('\'/\' requested')
     res.send(`<h>Hello from Kathy's Server</h>`)
